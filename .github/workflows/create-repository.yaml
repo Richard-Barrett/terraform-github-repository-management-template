@@ -1,0 +1,34 @@
+---
+name: Create Repository PR
+
+on:
+  workflow_dispatch:
+    inputs:
+      payload:
+        description: 'JSON payload from ServiceNow'
+        required: true
+
+jobs:
+  update-locals:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Determine Organization Directory
+        id: org-dir
+        run: |
+          ORG=$(echo '${{ fromJson(github.event.inputs.payload).organization }}')
+          echo "org_dir=$ORG" >> $GITHUB_OUTPUT
+
+      - name: Update locals.tf
+        run: |
+          echo "${{ github.event.inputs.payload }}" > payload.json
+          python update_locals.py --org-dir "${{ steps.org-dir.outputs.org_dir }}"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          title: "Add new repository to ${{ fromJson(github.event.inputs.payload).organization }}: ${{ fromJson(github.event.inputs.payload).repository_name }}"
+          branch: "new-repo-${{ fromJson(github.event.inputs.payload).repository_name }}"
+          commit-message: "Add new repository configuration to ${{ fromJson(github.event.inputs.payload).organization }}"
