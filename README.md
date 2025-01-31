@@ -2,6 +2,14 @@
 
 This is a Template of How To Manage Terraform Repositories for GitHub Organizations
 
+## Example Process and Workflow Digrams
+
+The following diagram shows the overall workflow in terms of what the user will do:
+
+![image](./images/servicenow_github_workflow.png)
+
+The user would fill out a form in GitHub, and an automation job would then transform the json payload and send it to a Flask App that would trigger an event on GitHub via a Webhook. Once the GitHub repository recieved the webhook a github action would be triggered to add to code to the terraform block via a pull request.
+
 - See [Automation Proposal](.AUTOMATION_PROPOSAL.md)
 
 <details>
