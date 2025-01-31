@@ -27,7 +27,7 @@ jobs:
           python update_locals.py --org-dir "${{ steps.org-dir.outputs.org_dir }}"
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@v7
         with:
           title: "Add new repository to ${{ fromJson(github.event.inputs.payload).organization }}: ${{ fromJson(github.event.inputs.payload).repository_name }}"
           branch: "new-repo-${{ fromJson(github.event.inputs.payload).repository_name }}"
