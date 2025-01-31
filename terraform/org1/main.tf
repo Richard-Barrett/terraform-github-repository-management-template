@@ -9,7 +9,7 @@ terraform {
 }
 
 provider "github" {
-  owner = "org1" # Replace with the GitHub organization name
+  owner = "org1"           # Replace with the GitHub organization name
   token = var.github_token # GitHub token with permissions for org1
 }
 
