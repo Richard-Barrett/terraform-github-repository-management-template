@@ -11,11 +11,11 @@ jobs:
         uses: actions/checkout@v4
 
       - name: terraform validate org1
-        uses: dflook/terraform-validate@v1
+        uses: dflook/terraform-validate@v2
         with:
           path: 'terraform/org1'
 
       - name: terraform validate org2
-        uses: dflook/terraform-validate@v1
+        uses: dflook/terraform-validate@v2
         with:
           path: 'terraform/org2'
